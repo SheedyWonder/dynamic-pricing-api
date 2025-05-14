@@ -6,29 +6,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/pricing")
-public class PricingController {
+@RequestMapping("/product")
+public class ProductController {
 
-    private final Map<String, Double> priceData = new HashMap<>();
+    private final Map<UUID, Double> productData = new HashMap<>();
 
-    public PricingController() {
+    public ProductController() {
         // Sample data
-        priceData.put("product_1", 100.0);
-        priceData.put("product_2", 200.0);
+        productData.put(UUID.randomUUID(), 100.0);
+        productData.put(UUID.randomUUID(), 200.0);
     }
 
 
     @GetMapping("/current-price")
-    public ResponseEntity<String> getCurrentPrice(@RequestParam String product_id) {
+    public ResponseEntity<String> getCurrentPrice(@RequestParam UUID product_id) {
         return ResponseEntity.ok("Price for product: " + product_id);
     }
 
     @PostMapping("/update-price")
-    public Map<String, Object> updatePrice(@RequestParam String product_id, @RequestParam Double new_price) {
-        priceData.put(product_id, new_price);
+    public Map<String, Object> updatePrice(@RequestParam UUID product_id, @RequestParam Double new_price) {
+        productData.put(product_id, new_price);
         return Map.of("product_id", product_id, "updated_price", new_price);
     }
 

@@ -13,4 +13,12 @@ public class Vendor {
     private UUID vendorId;
     private String name;
 
+    public UUID getVendorId() {
+        return vendorId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }

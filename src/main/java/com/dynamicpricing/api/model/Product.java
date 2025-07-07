@@ -1,21 +1,34 @@
 package com.dynamicpricing.api.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
-    @Id
+    
+    @SuppressWarnings("deprecation")
+    @Id //Added annotations in order to cleanly manage UUID
+    @GeneratedValue(generator = "UUID")
+    @org.hibernate.annotations.GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(updatable = false, nullable = false)
     private UUID id;
     private int price;
     private String name;
-    private double costPrice; // Price at which you purchase the product
-    private int stockLevel; // Current stock
+    private String sku;
+    private BigDecimal basePrice;
+    private BigDecimal costPrice; // Price at which you purchase the product
+    private int inventory; // Current stock
     
     @ManyToOne
     @JoinColumn(name = "vendor_id")
@@ -38,20 +51,20 @@ public class Product {
         this.price = price;
     }
 
-    public double getCostPrice() {
+    public BigDecimal getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(double costPrice) {
+    public void setCostPrice(BigDecimal costPrice) {
         this.costPrice = costPrice;
     }
 
-    public int getStockLevel() {
-        return stockLevel;
+    public int getInventory() {
+        return inventory;
     }
 
     public void setStockLevel(int stockLevel) {
-        this.stockLevel = stockLevel;
+        this.inventory = stockLevel;
     }
 
     public Vendor getVendor() {
@@ -84,7 +97,7 @@ public class Product {
                 "id=" + id +
                 ", price=" + price +
                 ", costPrice=" + costPrice +
-                ", stockLevel=" + stockLevel +
+                ", stockLevel=" + inventory +
                 ", vendor=" + vendor +
                 ", description='" + description + '\'' +
                 '}';
@@ -100,6 +113,22 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public BigDecimal getBasePrice() {
+        return basePrice;
+    }
+
+    public void setBasePrice(BigDecimal basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
 }

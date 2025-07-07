@@ -41,8 +41,8 @@ public class DynamicPricingService {
         }
 
         // Ensure the price is above cost (Cost-Based Pricing)
-        if (price < product.getCostPrice()) {
-            price = product.getCostPrice(); // Don't let the price go below cost
+        if (Double.compare(price, product.getCostPrice().doubleValue()) < 0) {
+            price = product.getCostPrice().doubleValue(); // Don't let the price go below cost
         }
 
         return price;

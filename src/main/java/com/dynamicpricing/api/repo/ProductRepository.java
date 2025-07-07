@@ -1,4 +1,8 @@
 package com.dynamicpricing.api.repo;
 
-public class ProductRepository {
-}
+import com.dynamicpricing.api.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface ProductRepository extends JpaRepository<Product, UUID> {}

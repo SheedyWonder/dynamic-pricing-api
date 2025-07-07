@@ -1,17 +1,24 @@
 package com.dynamicpricing.api.model;
 
+import java.util.Objects;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
-import java.util.UUID;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
     @Id
     private UUID id;
     private int price;
-    private String source;
-    private int quantity;
+    private String name;
+    private double costPrice; // Price at which you purchase the product
+    private int stockLevel; // Current stock
+    
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
     private Vendor vendor;
     private String description;
 
@@ -31,20 +38,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getSource() {
-        return source;
+    public double getCostPrice() {
+        return costPrice;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStockLevel() {
+        return stockLevel;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStockLevel(int stockLevel) {
+        this.stockLevel = stockLevel;
     }
 
     public Vendor getVendor() {
@@ -63,14 +70,36 @@ public class Product {
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", price=" + price +
-                ", source='" + source + '\'' +
-                ", quantity=" + quantity +
+                ", costPrice=" + costPrice +
+                ", stockLevel=" + stockLevel +
                 ", vendor=" + vendor +
+                ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
 }

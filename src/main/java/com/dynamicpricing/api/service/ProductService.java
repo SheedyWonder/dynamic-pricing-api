@@ -45,4 +45,11 @@ public class ProductService {
         return productRepository.save(existingProduct);
     }
 
+    public void deleteProduct(UUID id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+
+        productRepository.delete(product);
+    }
+
 }

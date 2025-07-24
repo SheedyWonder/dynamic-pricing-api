@@ -34,7 +34,6 @@ public class Order {
 
     @ManyToOne
     private Vendor vendor;
-    
 
     public UUID getId() {
         return id;

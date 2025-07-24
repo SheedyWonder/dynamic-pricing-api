@@ -15,3 +15,12 @@ public class WebConfig implements WebMvcConfigurer {
 
 }
 
+/*
+* FOR PRODUCTION:
+* //Addressing security concerns
+* registry.addMapping("/**")
+        .allowedOrigins("https://yourfrontend.com")
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*");
+
+* */

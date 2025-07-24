@@ -8,7 +8,7 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        return "Welcome to the Dynamic Pricing API!";
+        return "Welcome to the Dynamic Pricing API!" + "\n" + "ONE OF MY FIRST EVER SOLO PROJECTS WATCH ME FUCKING WORK";
     }
 }
 

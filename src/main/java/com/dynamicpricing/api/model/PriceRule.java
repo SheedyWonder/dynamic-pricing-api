@@ -33,6 +33,7 @@ public class PriceRule {
 
     @ManyToOne
     private Product product;
+
     public UUID getId() {
         return id;
     }

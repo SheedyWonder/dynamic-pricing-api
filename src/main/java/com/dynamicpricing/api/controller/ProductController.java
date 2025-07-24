@@ -1,5 +1,6 @@
 package com.dynamicpricing.api.controller;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +34,17 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}/price")
-    public ResponseEntity<Double> getDynamicPrice(@PathVariable UUID productId) {
+    public ResponseEntity<BigDecimal> getDynamicPrice(@PathVariable UUID productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         // Simulate parameters for dynamic pricing calculation
         int demandFactor = 80; // Example demand factor
-        int competitorPrice = 90; // Example competitor price
+        BigDecimal competitorPrice = BigDecimal.valueOf(90); // Example competitor price
         int stockLevel = 40; // Example stock level
         boolean isSeasonal = true; // Example seasonal flag
 
-        double dynamicPrice = dynamicPricingService.calculateDynamicPrice(
+        BigDecimal dynamicPrice = dynamicPricingService.calculateDynamicPrice(
                 product, demandFactor, competitorPrice, stockLevel, isSeasonal);
 
         return ResponseEntity.ok(dynamicPrice);

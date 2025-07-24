@@ -1,13 +1,14 @@
 package com.dynamicpricing.api.dto;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class ProductDTO {
     private UUID id;
     private String name;
-    private int price;
+    private BigDecimal price;
 
-    public ProductDTO(UUID id, String name, int price) {
+    public ProductDTO(UUID id, String name, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -29,11 +30,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

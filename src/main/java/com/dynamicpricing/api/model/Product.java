@@ -23,7 +23,7 @@ public class Product {
     )
     @Column(updatable = false, nullable = false)
     private UUID id;
-    private int price;
+    private BigDecimal price;
     private String name;
     private String sku;
     private BigDecimal basePrice;
@@ -43,11 +43,11 @@ public class Product {
         this.id = id;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

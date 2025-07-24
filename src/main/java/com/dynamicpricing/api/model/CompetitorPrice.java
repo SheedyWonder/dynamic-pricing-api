@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 public class CompetitorPrice {
+    
     @SuppressWarnings("deprecation")
     @Id
     @GeneratedValue(generator = "UUID")
